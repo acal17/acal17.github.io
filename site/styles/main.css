@@ -1,0 +1,237 @@
+/* Fonts */
+
+@import url('fira_code/main.css');
+
+/* Variables */
+
+:root {
+  --bg: #333;
+  --bg-dark: #222;
+  --fg: #aaa;
+  --fg-accent: #d33682;
+}
+
+/* Fake elements */
+
+.vr {
+  border-left: 1px solid var(--fg);
+}
+
+/* Light mode */
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #eee;
+    --bg-dark: #ddd;
+    --fg: #333;
+    --fg-accent: #d33682;
+  }
+
+  ::selection {
+    background: #ccc !important;
+  }
+}
+
+/* Page structure */
+
+html {
+  display: block;
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0;
+  height: 100%;
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5em;
+}
+
+
+#content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1em;
+
+  overflow-y: auto;
+
+  box-sizing: border-box;
+  max-height: 100%;
+  height: 100%;
+  width: 700px;
+  padding: 2.5em;
+
+  /* Hack to move scrollbar to left of container */
+  direction: rtl;
+  scrollbar-gutter: stable;
+}
+
+#content, #footer {
+  /* Fix direction of text from scrollbar hack */
+  direction: ltr;
+}
+
+#content > *:not(h1) {
+  margin-top: 0.15em;
+}
+
+#content > h1:not(:first-child) {
+  margin-top: 1em;
+}
+
+
+#footer-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2em;
+  width: 100%;
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+  html {
+    overflow: hidden auto;
+
+    /* Prevent reflowing page when scrollbar changes visibility */
+    margin-right: calc(100% - 100vw);
+  }
+
+  #header {
+    width: 100%;
+  }
+
+  body {
+    flex-direction: column;
+  }
+
+  #header, #content-container {
+    padding: 2em;
+  }
+
+  #header {
+    display: flex !important;
+    align-items: center;
+    flex-direction: column;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 1em;
+  }
+
+  #header hr {
+    width: 80%;
+  }
+
+  #header-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2em;
+    width: 100%;
+  }
+
+  #sidebar {
+    display: none;
+  }
+
+  #content-container {
+    max-width: 100%;
+    direction: ltr;
+    overflow-y: initial;
+
+    box-sizing: border-box;
+    padding-bottom: 0em;
+  }
+
+  #footer {
+    margin-bottom: 2.5em;
+  }
+}
+
+/* Page styling */
+
+html {
+  background: var(--bg);
+}
+
+#header {
+  background: var(--bg-dark);
+}
+
+#sidebar {
+  background: var(--bg-dark);
+}
+
+#footer-links a {
+  text-align: center;
+}
+
+/* General styling */
+
+h1 {
+  margin-bottom: 0;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  width: 80%;
+
+  background: var(--fg);
+}
+
+ul {
+  list-style-type: "- ";
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+/* Text styling */
+
+* {
+  font-family: 'Fira Code', monospace;
+  color: var(--fg);
+}
+
+a {
+  color: var(--fg-accent);
+}
+
+::selection {
+  background: #444;
+}
+
+/* Scrollbar styling - Firefox*/
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fg-accent) var(--bg-dark);
+}
+
+/* Scrollbar styling - WebKit */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fg-accent);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  /* calculated from --fg-accent using Firefox magic */
+  background: #b21c6a;
+}
